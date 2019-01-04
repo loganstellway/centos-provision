@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Install Repo
+rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+
+# Enable Repo
+yum-config-manager --disable 'mysql*'
+yum-config-manager --enable mysql57-community
+
+# Install MySQL Client
+yum -y install mysql-community-common mysql-community-client mysql-community-server
+
+# Start / enable mysqld service
+systemctl start mysqld
+systemctl enable mysqld

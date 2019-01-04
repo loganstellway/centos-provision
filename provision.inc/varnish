@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Install dependencies
+yum -y install pygpgme yum-utils
+
+# Create repo file
+cat > /etc/yum.repos.d/varnish41.repo << 'EOF'
+[varnishcache_varnish41]
+name=varnishcache_varnish41
+baseurl=https://packagecloud.io/varnishcache/varnish41/el/7/$basearch
+repo_gpgcheck=1
+gpgcheck=0
+enabled=1
+gpgkey=https://packagecloud.io/varnishcache/varnish41/gpgkey
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+
+[varnishcache_varnish41-source]
+name=varnishcache_varnish41-source
+baseurl=https://packagecloud.io/varnishcache/varnish41/el/7/SRPMS
+repo_gpgcheck=1
+gpgcheck=0
+enabled=1
+gpgkey=https://packagecloud.io/varnishcache/varnish41/gpgkey
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+EOF
+
+yum -q makecache -y --disablerepo='*' --enablerepo='varnishcache_varnish41'
+yum -y install varnish
+
+# Service
+systemctl start varnish
+systemctl enable varnish

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cat >> /etc/profile << 'EOF'
+
+# Aliases
+alias c="clear"
+alias ll="ls -lah"
+alias cl="c && ll"
+alias ..="cd .."
+alias empty="cat /dev/null >"
+
+EOF
+

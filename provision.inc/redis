@@ -1,0 +1,5 @@
+#!/bin/bash
+
+yum -y install redis
+systemctl start redis
+systemctl enable redis

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# SELinux
+setsebool -P httpd_enable_homedirs 1
+setsebool -P httpd_can_network_connect 1
+setsebool -P httpd_unified 1
+setsebool -P httpd_read_user_content 1
+setsebool -P httpd_anon_write 1
+setsebool -P httpd_sys_script_anon_write 1

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Get current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+run()
+{
+    echo "Running Task: ${1}"
+    FILE="${DIR}/provision.inc/${1}"
+    if [ -f $FILE ]; then
+        source $FILE
+    fi
+}
+
+# Update yum dependencies
+yum -y update
+yum -y install epel-release
+
+# Run install scripts
+run aliases
+run php
+run nginx
+run mysql
+run varnish
+run yarn
+run elasticsearch
+run redis
+run git
+run selinux

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Create repo file
+touch /etc/yum.repos.d/nginx.repo
+
+cat > /etc/yum.repos.d/nginx.repo << 'EOF'
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/7/$basearch/
+gpgcheck=0
+enabled=1
+EOF
+
+# Install Nginx
+yum -y install nginx
+
+# Restore SELinux context
+restorecon -R /etc/nginx/
+
+# Start service
+systemctl start nginx
+systemctl enable nginx

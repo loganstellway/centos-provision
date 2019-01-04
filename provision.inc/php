@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Install Repo
+rpm -Uhv https://centos7.iuscommunity.org/ius-release.rpm
+
+# Install Packages
+yum -y install php71u php71u-bcmath php71u-cli php71u-common php71u-fpm php71u-gd php71u-intl php71u-json php71u-mbstring php71u-mcrypt php71u-mysqlnd php71u-opcache php71u-pdo php71u-soap php71u-xml
+
+# php.ini settings
+# sed -i.bk s/memory_limit\ =\ 128M/memory_limit\ =\ 768M/g /etc/php.ini
+# sed -i.bk s/\;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g /etc/php.ini
+
+# Service
+systemctl start php-fpm
+systemctl enable php-fpm
